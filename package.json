@@ -1,0 +1,27 @@
+{
+  "name": "backend-delete-medicine",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node_modules\\.bin\\nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/COE453-Project/Backend-Delete-Medicine.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/COE453-Project/Backend-Delete-Medicine/issues"
+  },
+  "homepage": "https://github.com/COE453-Project/Backend-Delete-Medicine#readme",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
