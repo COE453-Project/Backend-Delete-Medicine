@@ -16,7 +16,7 @@ app.delete('/:id', (req, res, next) => {
   fetch(url, options)
     .then(response => {
       if (response.ok) {
-        res.status(500).send(`Medicine with id ${id} deleted successfully`);
+        res.status(200).send(`Medicine with id ${id} deleted successfully`);
         console.log(`Medicine with id ${id} deleted successfully`);
       } else {
         res.status(response.status).send(`Failed to delete medicine ${id}`)
