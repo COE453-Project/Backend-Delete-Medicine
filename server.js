@@ -8,13 +8,23 @@ const port = 3000;
 app.use(cors());
 
 app.delete('/:id', (req, res, next) => {
-    const id = req.params.id;
+  const db = 'https://backend-database-olz2xjbmza-uc.a.run.app'
+  const id = req.params.id;
+  const url = `${db}/${id}`;
+  const options = {method: 'DELETE'}
 
-    // TODO delete the item from the database
-    console.log(`Deleting item with id ${id}`);
-
-    res.status(204).send();
-    next();
+  fetch(url, options)
+    .then(response => {
+      if (response.ok) {
+        console.log(`Medicine with id ${id} deleted successfully`);
+      } else {
+        throw new Error(`Failed to delete medicine ${id}`);
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  next();
 });
 
 app.use(logResponse);
