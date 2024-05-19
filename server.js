@@ -8,24 +8,36 @@ const db = 'https://backend-database-olz2xjbmza-uc.a.run.app'
 
 app.use(cors());
 
-app.delete('/:id', (req, res, next) => {
+app.delete('/:id', async (req, res, next) => {
   const id = req.params.id;
   const url = `${db}/${id}`;
   const options = {method: 'DELETE'}
 
-  fetch(url, options)
-    .then(response => {
-      if (response.ok) {
-        res.status(200).send(`Medicine with id ${id} deleted successfully`);
+  let status = 0;
+  let content = '';
+  console.log(`Before fetch to ${url}`);
+  await fetch(url, options)
+    .then(async response => {
+      if (response.status === 204) {
+        status = 204
         console.log(`Medicine with id ${id} deleted successfully`);
       } else {
-        res.status(response.status).send(`Failed to delete medicine ${id}`)
+        status = response.status
+        content = await response.json()
       }
     })
     .catch(error => {
+      status = 500
+      content = 'Internal server error occurred'
       console.error('Error:', error);
-      res.status(500).send('Internal server error occurred');
     });
+
+    if (content === '') {
+      res.status(status).send();
+    } else {
+      res.status(status).send(content);
+    
+    }
   next();
 });
 
